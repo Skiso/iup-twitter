@@ -11,14 +11,14 @@ use AppBundle\Entity\Message;
 /**
  * Message controller.
  *
- * @Route("/message")
+ * @Route("/")
  */
 class MessageController extends Controller
 {
     /**
      * Lists all Message entities.
      *
-     * @Route("/", name="message_index")
+     * @Route("message/", name="message_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -35,7 +35,7 @@ class MessageController extends Controller
     /**
      * Creates a new Message entity.
      *
-     * @Route("/new", name="message_new")
+     * @Route("message/new", name="message_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -94,7 +94,7 @@ class MessageController extends Controller
     /**
      * Finds and displays a Message entity.
      *
-     * @Route("/{id}", name="message_show")
+     * @Route("message/{id}", name="message_show")
      * @Method("GET")
      */
     public function showAction(Message $message)
@@ -110,7 +110,7 @@ class MessageController extends Controller
     /**
      * Displays a form to edit an existing Message entity.
      *
-     * @Route("/{id}/edit", name="message_edit")
+     * @Route("message/{id}/edit", name="message_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Message $message)
@@ -137,7 +137,7 @@ class MessageController extends Controller
     /**
      * Deletes a Message entity.
      *
-     * @Route("/{id}", name="message_delete")
+     * @Route("message/{id}", name="message_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Message $message)
@@ -168,5 +168,20 @@ class MessageController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * @Route("show_message/{id}", name="show_specif_message")
+     */
+    public function showSpecifMessage(Message $message)
+    {
+
+        $messages = $this->getDoctrine()
+            ->getRepository('AppBundle:Message')
+            ->find($message->getId());
+
+        return $this->render('message/show_message.html.twig', [
+            'message' => $messages,
+        ]);
     }
 }

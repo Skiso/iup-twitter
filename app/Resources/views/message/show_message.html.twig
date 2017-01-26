@@ -38,11 +38,10 @@
     <div id="wrapper">
         <div id="container">
             <fieldset>
-                <legend>Accueil - {{ messages|length }} message(s)</legend>
-                {% for message in messages %}
+                <legend>Message</legend>
+
                     <div class="panel panel-default">
                         <div class="panel-heading"> <a href="{{ path('user_message', {'username': message.user.username }) }}">{{ message.user.username }}</a>
-                            <a href="{{ path('show_specif_message',{'id':message.id}) }}">Show</a>
                             {% if message.parent is not null %}
                                 a retweeté
                             {% endif %}
@@ -55,7 +54,7 @@
                             {% set statusId = 0 %}
                             {% for status in message.status %}
                                 {% if status.user == app.user %}
-                                {% set statusId = status.id %}
+                                    {% set statusId = status.id %}
                                 {% endif %}
                             {% endfor %}
 
@@ -63,28 +62,25 @@
                         <div class="panel-footer">
                             <i class="fa fa-thumbs-o-up" ></i>
 
-                             {% if statusId > 0 %}
-                                    <a href="{{ path('unlike' , {'id' : statusId }) }}">
-                                     Je n'aime plus
-                                    </a>
-                                    {% else %}
-                                        <a href="{{ path('like' , {'id' : message.id }) }}">
-                                            J'aime
-                                        </a>
-                             {% endif %}
+                            {% if statusId > 0 %}
+                                <a href="{{ path('unlike' , {'id' : statusId }) }}">
+                                    Je n'aime plus
+                                </a>
+                            {% else %}
+                                <a href="{{ path('like' , {'id' : message.id }) }}">
+                                    J'aime
+                                </a>
+                            {% endif %}
 
                             {% if (message.parent is not null and message.parent.user != app.user)
                             or (message.parent is null) %}
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                            <a href="{{ path('retweet' , {'id' : message.id }) }}"> Retweet</a>
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                <a href="{{ path('retweet' , {'id' : message.id }) }}"> Retweet</a>
                             {% endif %}
                             <A href="mailto:test@test.fr?subject=TweetPartage&body={{  message.content }}">Partager par email</A>
 
                         </div>
                     </div>
-                {% else %}
-                    Aucun message
-                {% endfor %}
 
             </fieldset>
 
