@@ -36,6 +36,9 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div id="wrapper">
+
+        {{  render(controller('AppBundle:Message:new')) }}
+
         <div id="container">
             <fieldset>
                 <legend>Accueil - {{ messages|length }} message(s)</legend>
@@ -87,10 +90,14 @@
                 {% endfor %}
 
             </fieldset>
-
-
+        </div>
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(messages) }}
         </div>
     </div>
+
+
 {% endblock %}
 
 {% block stylesheets %}
