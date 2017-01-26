@@ -54,6 +54,9 @@
                                     <video width="320" height="180" controls="controls">
                                         <source src="{{ asset('uploads/pictures/' ~ message.picture) }}" type="video/mp4" />
                                     </video>
+                                {% elseif message.picture|ext == 'pdf' %}
+                                  <a href="{{ asset('uploads/pdf/' ~ message.picture) }}" target="_blank"> <img src="{{ asset('uploads/pictures/PDF.png') }}" style="max-width: 256px;" /></a>
+
                                 {% else %}
                                     <img src="{{ asset('uploads/pictures/' ~ message.picture) }}" style="max-width: 256px;" />
                                 {% endif %}
@@ -85,6 +88,7 @@
                             <i class="fa fa-twitter" aria-hidden="true"></i>
                             <a href="{{ path('retweet' , {'id' : message.id }) }}"> Retweet</a>
                             {% endif %}
+                            <A href="mailto:test@test.fr?subject=TweetPartage&body={{  message.content }}">Partager par email</A>
 
                         </div>
                     </div>

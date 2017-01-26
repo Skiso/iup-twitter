@@ -21,7 +21,7 @@ class MessageType extends AbstractType
         ->add('content', TextareaType::class)
 
         ->add('picture', FileType::class, array(
-            'label' => 'Picture (PNG, JPG, GIF, MP4)',
+            'label' => 'Picture (PDF, PNG, JPG, GIF, MP4)',
             'data_class' => null,
             ))
         ;
